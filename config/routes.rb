@@ -6,5 +6,10 @@ Rails.application.routes.draw do
         confirmations: 'users/confirmations'
       }
   resources :posts
+  namespace :admin do
+  	resources :posts
+  	root to: "posts#index"
+  	
+  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
