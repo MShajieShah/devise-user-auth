@@ -1,5 +1,44 @@
 
+<% if has_role?(:admin) %>
+<h1> Dashboard </h1>
   Logged in as <strong><%= current_user.email %></strong>.
+  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
+  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+  
+
+  <h3>All User Posts</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Username/Email</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% Post.all.each do |post| %>
+      <tr>
+        <td><%= post.title %></td>
+        <td><%= post.description %></td>
+        <% if post.user.username == nil %>
+        <td><%=post.user.email%>
+          <% else %>
+        <td><%= post.user.username %></td>
+        <% end %>
+        <td><%= link_to 'Show', post %></td>
+        <td><%= link_to 'Edit', edit_post_path(post) %></td>
+        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+
+</table>
+
+  <%else%>
+Logged in as <strong><%= current_user.email %></strong>.
   <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
   <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
   <h1>Posts</h1>
@@ -20,7 +59,6 @@
         <td><%= post.title %></td>
         <td><%= post.description %></td>
         <td><%= post.user_id %></td>
-
         <td><%= link_to 'Show', post %></td>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>
         <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -60,3 +98,4 @@
     <% end %>
   </tbody>
 </table>
+<% end %>
