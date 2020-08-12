@@ -1,5 +1,5 @@
-
-<% if has_role?(:admin) %>
+<!-- 
+<% if current_user.has_role?(:admin) %>
 <h1> Dashboard </h1>
   Logged in as <strong><%= current_user.email %></strong>.
   <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
@@ -71,7 +71,7 @@ Logged in as <strong><%= current_user.email %></strong>.
 
 <%= link_to 'New Post', new_post_path %>
 <br>
-
+ -->
   <h1>Other User Posts</h1>
 
 <table>

@@ -1,11 +1,20 @@
 Rails.application.routes.draw do
-  root to: "posts#index"
-      devise_for :users, controllers: {
+  root to: "home#index"
+  #     devise_for :users, controllers: {
+  #       sessions: 'users/sessions',
+  #       registrations: 'users/registrations',
+  #       confirmations: 'users/confirmations'
+  #     }
+  # resources :posts
+    get  'signup', :controller => 'users', :action => 'new'
+   get  'logout', :controller => 'user_sessions', :action => 'destroy'
+   get 'login', :controller => 'user_sessions', :action => 'new'
+       devise_for :users, controllers: {
         sessions: 'users/sessions',
         registrations: 'users/registrations',
         confirmations: 'users/confirmations'
       }
-  resources :posts
-  
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+ resources :users
+ resources :posts
 end
